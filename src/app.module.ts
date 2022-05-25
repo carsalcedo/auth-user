@@ -7,6 +7,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 import { DATABASE_HOST, DBNAME, PASSWORD, PUERTO, USERNAME } from './config/constants';
+import { AuthService } from './auth/auth.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -35,6 +37,6 @@ import { DATABASE_HOST, DBNAME, PASSWORD, PUERTO, USERNAME } from './config/cons
     AuthModule,
   ],
   controllers: [AppController, AuthController],
-  providers: [AppService],
+  providers: [AppService, AuthService, JwtService],
 })
 export class AppModule {}

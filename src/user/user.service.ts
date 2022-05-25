@@ -4,6 +4,11 @@ import { Repository } from 'typeorm';
 import { CreateUserDto, EditeUserDto } from './dtos';
 import { User } from './entities';
 
+export interface UserFindOne{
+    id?: number;
+    email?: string;
+}
+
 @Injectable()
 export class UserService {
     constructor(
@@ -47,10 +52,10 @@ export class UserService {
 
    }
 
-   async findOne(email: string) {
+   async findOne(data: UserFindOne) {
        return await this.userRepository
             .createQueryBuilder('user')
-            .where({email})
+            .where(data)
             .addSelect('user.password')
             .getOne()
    }
