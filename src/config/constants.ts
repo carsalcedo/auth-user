@@ -4,4 +4,4 @@
  export const PASSWORD = 'PASSWORD';
  export const DBNAME = 'DBNAME';
  export const JWT_SECRET = 'JWT_SECRET';
- 
+ export const PORT= 'PORT';
