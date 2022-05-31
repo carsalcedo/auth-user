@@ -4,6 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { initSwagger } from './app.swager';
 import { PORT } from './config/constants';
+import { setDefaultUser } from './config/default.user';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,6 +13,7 @@ async function bootstrap() {
   const port =  parseInt(config.get<string>(PORT), 10) || 3000;
 
   initSwagger(app);
+  setDefaultUser(config), //aqui importamos el usuario creado por defecto a la BD
 
 
   app.useGlobalPipes(
