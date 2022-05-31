@@ -39,8 +39,8 @@ export class UserService {
    }
 
    async editOne(id: number, dto: EditeUserDto) {
-       const userExist = await this.userRepository.findOne({email: dto.email}); //valida que nos e repita el mismo correo
-       if (userExist) throw new BadRequestException('user already registered with email');
+      // const userExist = await this.userRepository.findOne({email: dto.email}); //valida que nos e repita el mismo correo
+      // if (userExist) throw new BadRequestException('user already registered with email');
        const user = await this.getOne(id)
        const editedUser = Object.assign(user, dto);
        return await this.userRepository.save(editedUser)

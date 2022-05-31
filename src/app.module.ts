@@ -6,6 +6,8 @@ import { UserModule } from './user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { DATABASE_HOST, DBNAME, PASSWORD, PUERTO, USERNAME } from './config/constants';
+import { AccessControlModule } from 'nest-access-control';
+import { roles } from './app.roles';
 
 
 @Module({
@@ -31,6 +33,7 @@ import { DATABASE_HOST, DBNAME, PASSWORD, PUERTO, USERNAME } from './config/cons
       isGlobal: true,
       envFilePath: '.env'
     }),
+    AccessControlModule.forRoles(roles),
     UserModule,
     AuthModule,
   ],

@@ -4,6 +4,7 @@ import { User } from 'src/commons/decorators';
 import { Auth } from 'src/commons/decorators/auth.decorators';
 import { User as UserEntity } from 'src/user/entities';
 import { AuthService } from './auth.service';
+import { LoginDto } from './dtos/login.dto';
 import { localAuthGuard } from './guards';
 
 @ApiTags('Auth routes')
@@ -17,10 +18,11 @@ export class AuthController {
     //con esto nos autenticamos
     @UseGuards(localAuthGuard)
     @Post('login')
-    login(
+   async login(
+      @Body() loginDto: LoginDto,
       @User() user: UserEntity
     ) {
-      const data = this.authService.login(user)
+      const data = await this.authService.login(user)
       return{
         message: 'Login exitoso',
         data
