@@ -18,7 +18,7 @@ import { roles } from './app.roles';
         type: 'mysql',
         host: config.get<string>(DATABASE_HOST),
         port: parseInt(config.get<string>(PUERTO), 10),
-        username: 'developer',
+        username: 'fersama',
         password: config.get<string>(PASSWORD),
         database: config.get<string>(DBNAME),
         entities: [__dirname + './**/**/*entities{.ts,.js}'],
