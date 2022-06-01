@@ -18,6 +18,21 @@ export class User {
     @Column({type: 'varchar', length: 255, nullable: false, select: false}) //select: false impide que se muestre la contraseña en la consulta
     password: string;
 
+    @Column({type: 'varchar', length: 10})
+    telephone: string;
+
+    @Column({type: 'varchar', length: 30})
+    country: string;
+    
+    @Column({name: 'type_document', type: 'varchar', length: 1})
+    typeDocument: string;
+
+    @Column({ type: 'varchar', length: 10})
+    document: string;
+
+    @Column({type: 'simple-array'})
+    roles:string[];
+
     @Column({type: 'bool', default: true})
     status: boolean;
 

@@ -4,11 +4,11 @@ import { AppService } from './app.service';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 import { DATABASE_HOST, DBNAME, PASSWORD, PUERTO, USERNAME } from './config/constants';
-import { AuthService } from './auth/auth.service';
-import { JwtService } from '@nestjs/jwt';
+import { AccessControlModule } from 'nest-access-control';
+import { roles } from './app.roles';
+
 
 @Module({
   imports: [
@@ -33,10 +33,11 @@ import { JwtService } from '@nestjs/jwt';
       isGlobal: true,
       envFilePath: '.env'
     }),
+    AccessControlModule.forRoles(roles),
     UserModule,
     AuthModule,
   ],
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService, JwtService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
