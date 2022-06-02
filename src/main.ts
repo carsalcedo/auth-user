@@ -4,7 +4,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { initSwagger } from './app.swager';
 import { PORT } from './config/constants';
-import { setDefaultUser } from './config/default.user';
+import { setDefaultUser } from './scripts/default.user';
+import generateTypeormConfigFile from './scripts/generate-typeorm-config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,7 +15,7 @@ async function bootstrap() {
 
   initSwagger(app);
   setDefaultUser(config), //aqui importamos el usuario creado por defecto a la BD
-
+  generateTypeormConfigFile(config);
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -25,3 +26,4 @@ async function bootstrap() {
   logger.log(`Server is running at ${await app.getUrl()} `)
 }
 bootstrap();
+

@@ -1,9 +1,10 @@
- export const DATABASE_HOST = 'DATABASE_HOST';
- export const PUERTO = 'PUERTO';
- export const USERNAME = 'USERNAME';
- export const PASSWORD = 'PASSWORD';
- export const DBNAME = 'DBNAME';
+// export const DATABASE_HOST = 'DATABASE_HOST';
+// export const PUERTO = 'PUERTO';
+// export const USERNAME = 'USERNAME';
+// export const PASSWORD = 'PASSWORD';
+// export const DBNAME = 'DBNAME';
  export const JWT_SECRET = 'JWT_SECRET';
+ export const TYPEORM_CONFIG= 'database.config';
  export const PORT= 'PORT';
  export const DEFAULT_USER_EMAIL= 'DEFAULT_USER_EMAIL';
  export const DEFAULT_USER_PASSWORD= 'DEFAULT_USER_PASSWORD';

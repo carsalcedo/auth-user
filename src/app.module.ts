@@ -1,37 +1,33 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import {TypeOrmModule} from '@nestjs/typeorm';
+import {TypeOrmModule, TypeOrmModuleOptions} from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-import { DATABASE_HOST, DBNAME, PASSWORD, PUERTO, USERNAME } from './config/constants';
 import { AccessControlModule } from 'nest-access-control';
 import { roles } from './app.roles';
+import { TYPEORM_CONFIG } from './config/constants';
+import * as Joi from '@hapi/joi';
+import databaseConfig from './config/database.config';
 
 
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        type: 'mysql',
-        host: config.get<string>(DATABASE_HOST),
-        port: parseInt(config.get<string>(PUERTO), 10),
-        username: 'fersama',
-        password: config.get<string>(PASSWORD),
-        database: config.get<string>(DBNAME),
-        entities: [__dirname + './**/**/*entities{.ts,.js}'],
-        autoLoadEntities:true,
-        synchronize: true,
-        logging: true,
-        logger: 'file',
-        retryDelay: 3000
-      })
+      useFactory: (config: ConfigService) =>
+        config.get<TypeOrmModuleOptions>(TYPEORM_CONFIG),
     }),
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: '.env'
+      load: [databaseConfig],
+      envFilePath: `.env.${process.env.NODE_ENV || 'development'}`, // .env.development
+      validationSchema: Joi.object({ 
+        NODE_ENV: Joi.string()
+          .valid('development', 'production')
+          .default('development')
+      }),
     }),
     AccessControlModule.forRoles(roles),
     UserModule,
