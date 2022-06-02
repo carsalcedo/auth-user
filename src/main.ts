@@ -8,7 +8,7 @@ import { setDefaultUser } from './scripts/default.user';
 import generateTypeormConfigFile from './scripts/generate-typeorm-config';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
   const logger = new Logger('Bootstrap');
   const config = app.get(ConfigService);
   const port =  parseInt(config.get<string>(PORT), 10) || 3000;
