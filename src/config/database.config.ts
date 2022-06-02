@@ -8,7 +8,7 @@ function typeOrmMOduleOptions(): TypeOrmModuleOptions{
         type: 'mysql',
         host: process.env.DATABASE_HOST,
         port: parseInt(process.env.PUERTO, 10),
-        username:'fersama',
+        username: process.env.USERNAME,
         password: process.env.PASSWORD,
         database: process.env.DBNAME,
         entities: [join(__dirname, '../**/**/*entity{.ts,.js}')],
