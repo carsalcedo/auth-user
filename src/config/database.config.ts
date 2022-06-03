@@ -8,7 +8,7 @@ function typeOrmMOduleOptions(): TypeOrmModuleOptions{
         type: 'mysql',
         host: process.env.DATABASE_HOST,
         port: parseInt(process.env.PUERTO, 10),
-        username: process.env.USERNAME,
+        username: 'uw9bbxg5dsnghyat',
         password: process.env.PASSWORD,
         database: process.env.DBNAME,
         entities: [join(__dirname, '../**/**/*entity{.ts,.js}')],
@@ -21,7 +21,7 @@ function typeOrmMOduleOptions(): TypeOrmModuleOptions{
        migrationsDir: 'src/migration',
        },
     
-        synchronize: false,
+        synchronize: true,
         logging: true,
         logger: 'file',
     }
